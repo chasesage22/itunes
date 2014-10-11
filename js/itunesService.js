@@ -1,6 +1,12 @@
 var app = angular.module('itunes');
 
-app.service('itunesService', function($http, $q){
+app.service('itunesService', function($q, $http){
+	this.getArtist = function(artist) {
+		return $http({method: 'JSONP', url:'https://itunes.apple.com/search?term=' + artist + '&callback=JSON_CALLBACK'});
+	};
+});
+
+
   //This service is what will do the 'heavy lifting' and get our data from the iTunes API.
   //Also not that we're using a 'service' and not a 'factory' so all your method you want to call in your controller need to be on 'this'.
 
@@ -10,4 +16,3 @@ app.service('itunesService', function($http, $q){
   //You can return the http request or you can make your own promise in order to manipulate the data before you resolve it.
 
     //Code here
-});
